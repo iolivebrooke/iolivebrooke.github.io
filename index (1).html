@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iris Oliver — CS Teacher & Former Microsoft PM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5FD;
+      --ink: #1A1626;
+      --ink-muted: #5E5475;
+      --purple: #6B3FA0;
+      --purple-dark: #4A2875;
+      --purple-light: #EDE8F8;
+      --purple-mid: #C4B2E8;
+      --lavender: #9B7DCC;
+      --card: #FFFFFF;
+      --border: rgba(107,63,160,0.12);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,245,253,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600;
+      color: var(--purple); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--ink-muted);
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--purple); }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      padding: 5rem 6rem; max-width: 1200px; margin: 0 auto;
+    }
+    .hero-text h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.1; font-weight: 600; margin-bottom: 1rem;
+    }
+    .hero-text h1 em { font-style: italic; color: var(--purple); }
+    .hero-subtitle {
+      font-size: 1.1rem; color: var(--ink-muted);
+      margin-bottom: 2rem; max-width: 420px; line-height: 1.7;
+    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .badge { padding: 0.3rem 0.85rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; }
+    .badge-purple { background: var(--purple-light); color: var(--purple-dark); }
+    .badge-lavender { background: #EAE4F5; color: #5B3A8A; }
+    .badge-soft { background: #E8E4F0; color: #4A3870; }
+
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.75rem; border-radius: 999px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: transform 0.15s; display: inline-block;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--purple); color: white; border: none; }
+    .btn-primary:hover { background: var(--purple-dark); }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--purple); color: var(--purple); }
+
+    .hero-image { display: flex; justify-content: center; align-items: center; }
+    .photo-frame {
+      width: 320px; height: 400px;
+      border-radius: 160px 160px 14px 14px;
+      background: var(--purple-light); overflow: hidden;
+      border: 4px solid var(--purple-light);
+      box-shadow: 14px 18px 0 var(--purple-mid);
+    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; color: var(--purple);
+    }
+    .photo-placeholder svg { opacity: 0.3; }
+    .photo-placeholder p { font-size: 0.82rem; opacity: 0.55; text-align: center; padding: 0 1rem; }
+
+    /* SECTION BASE */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 600; line-height: 1.2; margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about { background: white; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--ink-muted); margin-bottom: 1.25rem; font-size: 1.05rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--bg); border-radius: var(--radius);
+      padding: 1.5rem; border: 1px solid var(--border);
+    }
+    .stat-number {
+      font-family: 'Fraunces', serif; font-size: 2.2rem;
+      font-weight: 600; color: var(--purple);
+    }
+    .stat-label { font-size: 0.85rem; color: var(--ink-muted); margin-top: 0.25rem; }
+
+    /* TEACHING */
+    #teaching { background: var(--bg); }
+    .teaching-hero-card {
+      background: var(--purple); border-radius: 20px;
+      padding: 3rem; color: white; margin-bottom: 2rem;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 2rem; align-items: center;
+    }
+    .teaching-hero-card h3 { font-family: 'Fraunces', serif; font-size: 1.7rem; margin-bottom: 0.75rem; }
+    .teaching-hero-card p { opacity: 0.85; font-size: 1rem; line-height: 1.65; max-width: 520px; }
+    .course-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      text-align: center; white-space: nowrap;
+    }
+    .course-badge .course-name { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; display: block; }
+    .course-badge .course-sub { font-size: 0.8rem; opacity: 0.75; margin-top: 0.25rem; display: block; }
+    .teaching-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .t-card {
+      background: white; border-radius: var(--radius);
+      padding: 1.5rem; border: 1px solid var(--border);
+    }
+    .t-card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--purple-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 0.85rem;
+    }
+    .t-card h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .t-card p { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.55; }
+
+    /* CAREER */
+    #career { background: white; }
+    .career-item {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 2.5rem; margin-bottom: 3rem; align-items: start;
+    }
+    .career-left { text-align: right; padding-top: 0.2rem; }
+    .career-date {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--purple); text-transform: uppercase;
+      display: block; margin-bottom: 0.3rem;
+    }
+    .career-company { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+    .career-right {
+      border-left: 2px solid var(--border);
+      padding-left: 2.5rem; position: relative;
+    }
+    .career-right::before {
+      content: ''; position: absolute; left: -7px; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--purple); border: 2px solid white;
+    }
+    .career-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .career-desc { font-size: 0.92rem; color: var(--ink-muted); line-height: 1.65; margin-bottom: 0.75rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.77rem; font-weight: 500; background: var(--purple-light); color: var(--purple-dark); }
+    .ms-tag { background: #EDF3FB; color: #1A5FB4; }
+
+    /* SKILLS */
+    #skills { background: var(--bg); }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .skill-group {
+      background: white; border-radius: var(--radius);
+      padding: 1.75rem; border: 1px solid var(--border);
+    }
+    .skill-group h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; margin-bottom: 1.25rem; color: var(--purple); }
+    .skill-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .skill-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .skill-name { font-size: 0.88rem; font-weight: 500; min-width: 130px; }
+    .skill-bar-bg { flex: 1; height: 6px; border-radius: 999px; background: var(--purple-light); overflow: hidden; }
+    .skill-bar-fill { height: 100%; border-radius: 999px; background: var(--purple); }
+
+    /* PROJECTS */
+    #projects { background: white; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .project-card {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; color: var(--ink);
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(107,63,160,0.13); }
+    .project-thumb {
+      width: 100%; aspect-ratio: 16/10;
+      background: var(--purple-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .project-platform {
+      position: absolute; top: 0.6rem; right: 0.6rem;
+      background: var(--purple); color: white;
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.2rem 0.55rem; border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .project-info { padding: 1.25rem 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; }
+    .project-desc { font-size: 0.87rem; color: var(--ink-muted); line-height: 1.55; flex: 1; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 1rem; font-size: 0.82rem; font-weight: 600;
+      color: var(--purple); text-decoration: none;
+    }
+    .project-link svg { transition: transform 0.15s; }
+    .project-card:hover .project-link svg { transform: translateX(3px); }
+
+    /* PHOTOS */
+    #photos { background: white; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .photo-cell {
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--purple-light); border: 1px solid var(--border);
+      aspect-ratio: 4/5;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--purple-dark); font-size: 0.82rem; text-align: center; padding: 1.5rem;
+      transition: transform 0.2s; cursor: pointer;
+    }
+    .photo-cell:hover { transform: scale(1.02); }
+    .photo-cell img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-cell:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+
+    /* CONTACT */
+    #contact { background: var(--purple-dark); color: white; text-align: center; }
+    #contact .section-label { color: var(--purple-mid); }
+    #contact .section-title { color: white; margin-bottom: 1rem; }
+    #contact .subtitle { color: rgba(255,255,255,0.65); font-size: 1.05rem; max-width: 460px; margin: 0 auto 2.5rem; }
+    .contact-links { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white; text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.5); }
+
+    footer {
+      background: var(--purple-dark); border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; min-height: auto; gap: 2rem; }
+      .hero-image { order: -1; }
+      .photo-frame { width: 240px; height: 300px; }
+      .about-grid, .skills-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .teaching-cards { grid-template-columns: 1fr; }
+      .teaching-hero-card { grid-template-columns: 1fr; }
+      .career-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .career-left { text-align: left; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-cell:first-child { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Iris Oliver</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 0;">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="badge-row">
+        <span class="badge badge-purple">Computer Science Teacher</span>
+        <span class="badge badge-lavender">Former Microsoft PM</span>
+        <span class="badge badge-soft">4 Years in the Classroom</span>
+      </div>
+      <h1>Hi, I'm<br /><em>Iris Oliver</em></h1>
+      <p class="hero-subtitle">
+        I teach Computer Science at Brooke High School!
+      </p>
+      <div class="cta-group">
+        <a href="#career" class="btn btn-primary">View my career</a>
+        <a href="#contact" class="btn btn-secondary">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="photo-frame">
+<img src="IMG_6614.jpg" alt="Me" />
+        <div class="photo-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <p>         <img src="Oliver_Iris-1024x683.jpg" alt="Me" />
+<br/>(see GitHub Pages instructions)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-label">About me</span>
+    <h2 class="section-title">From product management to the classroom.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I spent years at Microsoft as a Product Manager, shipping software used by millions. 
+        </p>
+        <p>
+          Today I teach AP Computer Science Principles and Visual Coding in JavaScript. I try to help my students learn to think like engineers, understand the societal impact of technology, and see themselves as people who belong in this field.
+        </p>
+        <p>
+          I also coach our school's powerlifting team! 
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Years teaching CS</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">AP</div>
+          <div class="stat-label">CS Principles instructor</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">MS</div>
+          <div class="stat-label">Former Microsoft PM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">💜</div>
+          <div class="stat-label">CS access for all students</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="section-inner">
+    <span class="section-label">In the classroom</span>
+    <h2 class="section-title">Making CS real for every student.</h2>
+
+    <div class="teaching-hero-card">
+      <div>
+        <h3>AP Computer Science Principles</h3>
+        <p>
+          AP CSP is a really important course to help high schoolers gain logical thinking skills, persistence, and understanding of the technology they use every day!
+        </p>
+      </div>
+      <div class="course-badge">
+        <span class="course-name">AP CSP</span>
+        <span class="course-sub">College Board Authorized</span>
+      </div>
+    </div>
+
+    <div class="teaching-cards">
+      <div class="t-card">
+        <div class="t-card-icon">🧠</div>
+        <h4>Computational thinking</h4>
+        <p>Problem decomposition and abstraction — the same skills I used daily as a PM at Microsoft, now taught to high schoolers.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">🌐</div>
+        <h4>Internet & data</h4>
+        <p>Students explore how the internet works, how data is collected, and why privacy and security matter to everyone.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">💻</div>
+        <h4>Algorithms & programming</h4>
+        <p>Hands-on coding projects grounded in real problems. Students leave knowing how to build, not just how to consume.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">⚖️</div>
+        <h4>Societal impact</h4>
+        <p>Technology has consequences. I make sure students think critically about what they build and for whom.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">🚀</div>
+        <h4>Career readiness</h4>
+        <p>I share my path from student to PM to teacher — and help students envision their own futures in tech.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">🤝</div>
+        <h4>Collaboration</h4>
+        <p>[Add something specific — a class project, a club, a hackathon, or how you run group work in your room.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="section-inner">
+    <span class="section-label">Career</span>
+    <h2 class="section-title">My professional journey.</h2>
+
+    <div class="career-item">
+      <div class="career-left">
+        <span class="career-date">2022 – Present</span>
+        <span class="career-company">Your School</span>
+      </div>
+      <div class="career-right">
+        <div class="career-title">AP Computer Science Principles Teacher</div>
+        <div class="career-desc">
+          Teaching AP CSP to high school students, bringing industry-level context into every lesson. Responsible for curriculum design, AP exam preparation, and creating a classroom where every student feels like they belong in tech. Brooke High School AP Award Winner in 2024 and 2025. 
+        </div>
+        <div class="tag-row">
+          <span class="tag">AP CSP</span>
+          <span class="tag">Curriculum design</span>
+          <span class="tag">Python</span>
+          <span class="tag">Scratch</span>
+          <span class="tag">CS equity</span>
+          <span class="tag">Google Classroom</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="career-item">
+      <div class="career-left">
+        <span class="career-date">2019 – 2022</span>
+        <span class="career-company">Microsoft</span>
+      </div>
+      <div class="career-right">
+        <div class="career-title">Product Manager</div>
+        <div class="career-desc">
+          Drove product strategy and execution for Windows and Edge at Microsoft, shipping features used by millions of customers. Collaborated across engineering, design, and research to define roadmaps, run user research, and make data-driven decisions. 
+        </div>
+        <div class="tag-row">
+          <span class="ms-tag">Product strategy</span>
+          <span class="ms-tag">Roadmapping</span>
+          <span class="ms-tag">User research</span>
+          <span class="ms-tag">Data analysis</span>
+          <span class="ms-tag">Stakeholder mgmt</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="career-item">
+      <div class="career-left">
+        <span class="career-date">Class of 2019</span>
+        <span class="career-company">Tufts University</span>
+      </div>
+      <div class="career-right">
+        <div class="career-title">Bachelor of Science in Computer Science</div>
+        <div class="career-desc">
+         Organized 2nd Annual Women in Tech Conference, leader of South Asian Political Action Committee, STEM Teaching Fellow
+        </div>
+        <div class="tag-row">
+          <span class="tag">Computer Science</span>
+          <span class="tag">Women in Tech</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 1rem;">
+      <a href="resume.pdf" class="btn btn-primary" download>Download full resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <span class="section-label">Skills</span>
+    <h2 class="section-title">What I bring to the table.</h2>
+    <div class="skills-layout">
+      <div class="skill-group">
+        <h3>Teaching & education</h3>
+        <div class="skill-list">
+          <div class="skill-row">
+            <span class="skill-name">AP CSP instruction</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Curriculum design</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Differentiation</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Google Classroom</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Assessment design</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tech & industry</h3>
+        <div class="skill-list">
+          <div class="skill-row">
+            <span class="skill-name">Product management</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:93%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Data analysis</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Agile / Scrum</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Microsoft 365</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <span class="section-label">Coding projects</span>
+    <h2 class="section-title">Things I've built.</h2>
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://openprocessing.org/@u335797/2908641" target="_blank">
+        <div class="project-thumb">
+          🎨
+          <span class="project-platform">OpenProcessing</span>
+        </div>
+        <div class="project-info">
+          <div class="project-title">Project One</div>
+          <div class="project-desc">Give this one a name and a sentence or two about what it does or what inspired it.</div>
+          <span class="project-link">
+            View project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://openprocessing.org/@u335797/2252324" target="_blank">
+        <div class="project-thumb">
+          💡
+          <span class="project-platform">OpenProcessing</span>
+        </div>
+        <div class="project-info">
+          <div class="project-title">Project Two</div>
+          <div class="project-desc">Give this one a name and a sentence or two about what it does or what inspired it.</div>
+          <span class="project-link">
+            View project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://academy.cs.cmu.edu/sharing/blanchedAlmondLion3181" target="_blank">
+        <div class="project-thumb">
+          🐍
+          <span class="project-platform">CMU CS Academy</span>
+        </div>
+        <div class="project-info">
+          <div class="project-title">Project Three</div>
+          <div class="project-desc">Give this one a name and a sentence or two about what it does or what inspired it.</div>
+          <span class="project-link">
+            View project
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+  <div class="section-inner">
+    <span class="section-label">Photos</span>
+    <h2 class="section-title">A few snapshots.</h2>
+    <div class="photo-grid">
+      <div class="photo-cell">
+        <img src="IMG_5740.JPG" alt="Me" />
+      </div>
+      <div class="photo-cell">   <img src="IMG_5093.JPG" alt="Me" /></div>
+      <div class="photo-cell">    <img src="06e6d8dd-d345-4f74-a3cf-00756362913d.JPG" alt="Me" /> </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label">Contact</span>
+    <h2 class="section-title">Let's connect.</h2>
+    <p class="subtitle">Whether you're a student, a parent, a fellow educator, or someone from the tech world — I'd love to hear from you.</p>
+    <div class="contact-links">
+      <a href="mailto:ioliver@ebrooke.org" class="contact-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        ioliver@ebrooke.org
+      </a>
+      <a href="https://www.linkedin.com/in/iris-oliver-28708812b" target="https://www.linkedin.com/in/iris-oliver-28708812b" class="contact-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with Claude &amp; hosted on GitHub Pages · © <span id="year"></span> Iris Oliver</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
